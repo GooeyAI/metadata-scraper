@@ -1,6 +1,6 @@
 FROM node:lts-alpine
 
-COPY package-lock.json package.json .
+COPY package-lock.json package.json ./
 RUN npm i
 
 COPY . .
