@@ -1,4 +1,4 @@
-FROM node:lts-alpine
+FROM node:lts-buster
 
 COPY package-lock.json package.json ./
 RUN npm i
