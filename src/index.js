@@ -7,10 +7,13 @@ const got = require("got");
 const zmq = require("zeromq");
 const twitter = require("twitter-text");
 
+require("dotenv").config();
+const BIND_ADDR = process.env.BIND_ADDR;
+
 (async function() {
   const sock = zmq.socket("rep");
-  console.log('serving @ "tcp://127.0.0.1:3000"');
-  await sock.bind("tcp://127.0.0.1:3000");
+  await sock.bind(BIND_ADDR);
+  console.log(`serving @ "${BIND_ADDR}"`);
 
   sock.on("message", async function(msg) {
     msg = JSON.parse(msg);

@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "dotenv": "^8.2.0",
     "got": "^11.8.0",
     "metascraper": "^5.14.18",
     "metascraper-description": "^5.14.18",
