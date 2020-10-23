@@ -9,6 +9,7 @@ const twitter = require("twitter-text");
 
 (async function() {
   const sock = zmq.socket("rep");
+  console.log('serving @ "tcp://127.0.0.1:3000"');
   await sock.bind("tcp://127.0.0.1:3000");
 
   sock.on("message", async function(msg) {
