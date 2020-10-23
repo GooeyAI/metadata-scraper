@@ -1,0 +1,20 @@
+{
+  "name": "metascraper_rpc",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "got": "^11.8.0",
+    "metascraper": "^5.14.18",
+    "metascraper-description": "^5.14.18",
+    "metascraper-image": "^5.14.18",
+    "metascraper-title": "^5.14.18",
+    "twitter-text": "^3.1.0",
+    "zeromq": "^5.2.0"
+  }
+}
