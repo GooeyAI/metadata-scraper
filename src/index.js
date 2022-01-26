@@ -1,7 +1,7 @@
 const metascraper = require("metascraper")([
   require("metascraper-title")(),
   require("metascraper-description")(),
-  require("metascraper-image")()
+  require("metascraper-image")(),
 ]);
 const got = require("got");
 const zmq = require("zeromq");
@@ -9,13 +9,14 @@ const twitter = require("twitter-text");
 
 require("dotenv").config();
 const BIND_ADDR = process.env.BIND_ADDR;
+const REQUEST_TIMEOUT_MS = parseInt(process.env.REQUEST_TIMEOUT_SEC) * 1000;
 
-(async function() {
+(async function () {
   const sock = zmq.socket("rep");
   await sock.bind(BIND_ADDR);
   console.log(`serving @ "${BIND_ADDR}"`);
 
-  sock.on("message", async function(msg) {
+  sock.on("message", async function (msg) {
     msg = JSON.parse(msg);
     console.log("<", msg);
 
@@ -49,6 +50,13 @@ async function dispatch({ cmd, data }) {
 }
 
 async function fetchMetadata(targetUrl) {
-  const { body: html, url } = await got(targetUrl);
+  const { body: html, url } = await got(targetUrl, {
+    timeout: {
+      request: REQUEST_TIMEOUT_MS,
+    },
+    retry: {
+      limit: 0,
+    },
+  });
   return await metascraper({ html, url });
 }
